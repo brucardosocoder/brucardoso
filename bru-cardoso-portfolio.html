@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bru Cardoso | Violonista, Guitarrista & Compositor</title>
+  <meta name="description" content="Bru Cardoso — violonista, guitarrista, compositor, arranjador e produtor musical com mais de 20 anos de experiência.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-alt: #111111;
+      --card: #161616;
+      --text: #f0f0f0;
+      --muted: #a0a0a0;
+      --accent: #c9a227; /* dourado elegante, referência a violão/cordas */
+      --accent-soft: rgba(201, 162, 39, 0.15);
+      --border: #2a2a2a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      background: 
+        radial-gradient(ellipse at 50% 0%, rgba(201, 162, 39, 0.12) 0%, transparent 60%),
+        linear-gradient(180deg, #0a0a0a 0%, #0f0f0f 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-size: 0.85rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 12vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(135deg, #fff 0%, #e0e0e0 50%, var(--accent) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--muted);
+      max-width: 640px;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #0a0a0a;
+    }
+
+    .btn-primary:hover {
+      background: #e0b82e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201, 162, 39, 0.3);
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 1.25rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+
+    nav.scrolled {
+      border-bottom-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: 0.08em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* Hamburger */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 110;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s ease;
+      border-radius: 1px;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Mobile menu overlay */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.97);
+      z-index: 105;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover {
+      color: var(--accent);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: 0.03em;
+      margin-bottom: 2rem;
+      line-height: 1.1;
+    }
+
+    p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 1.25rem;
+    }
+
+    p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Intro block */
+    .intro {
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intro-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .intro-text {
+      font-size: 1.25rem;
+      line-height: 1.8;
+      color: var(--text);
+      max-width: 800px;
+    }
+
+    /* Cards grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      margin-bottom: 0;
+    }
+
+    /* Highlight list */
+    .highlights {
+      list-style: none;
+      margin-top: 1.5rem;
+    }
+
+    .highlights li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.9rem;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .highlights li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    /* Social */
+    .social-section {
+      text-align: center;
+      padding-bottom: 4rem;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.25s;
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2.5rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+
+      .mobile-menu {
+        display: flex;
+      }
+
+      section {
+        padding: 4rem 1.25rem;
+      }
+
+      .intro-inner {
+        padding: 3.5rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav id="nav">
+    <a href="#top" class="nav-logo" id="logo">BRU CARDOSO</a>
+    <ul class="nav-links">
+      <li><a href="#bio">Bio</a></li>
+      <li><a href="#formacao">Formação</a></li>
+      <li><a href="#atuacao">Atuação</a></li>
+      <li><a href="#producao">Produção</a></li>
+      <li><a href="#composicao">Composição</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#bio">Bio</a>
+    <a href="#formacao">Formação</a>
+    <a href="#atuacao">Atuação</a>
+    <a href="#producao">Produção</a>
+    <a href="#composicao">Composição</a>
+    <a href="#contato">Contato</a>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero" id="top">
+    <span class="hero-tag">Violão · Guitarra · Composição</span>
+    <h1>BRU CARDOSO</h1>
+    <p class="hero-subtitle">
+      Violonista, guitarrista, compositor, arranjador e produtor musical.<br>
+      Mais de 20 anos de experiência artística.
+    </p>
+    <div class="hero-cta">
+      <a href="#bio" class="btn btn-primary">Conheça a trajetória</a>
+      <a href="#contato" class="btn btn-outline">Redes & Streaming</a>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <div class="intro" id="bio">
+    <div class="intro-inner">
+      <p class="section-label">Sobre</p>
+      <h2>Mais de duas décadas<br>entre cordas e criação</h2>
+      <p class="intro-text">
+        Bru Cardoso é violonista, guitarrista, compositor, arranjador e produtor musical, com mais de 20 anos de experiência artística. Sua trajetória une tradição brasileira e linguagem contemporânea — do choro e da bossa nova ao rock, blues, jazz e metal.
+      </p>
+    </div>
+  </div>
+
+  <!-- FORMAÇÃO -->
+  <section id="formacao">
+    <p class="section-label">Trajetória</p>
+    <h2>Formação e repertório</h2>
+    <p>
+      Construiu sua trajetória estudando de forma autodidata diversos estilos, do <strong>choro, samba e bossa nova</strong> ao <strong>pop, rock, blues e jazz</strong>.
+    </p>
+    <p>
+      É formado no <strong>Curso Técnico de Violão</strong> e atualmente estuda <strong>Guitarra, Composição e Arranjo e Regência</strong> na Escola de Música Villa-Lobos, além de cursar <strong>Licenciatura em Música</strong> na Uninter.
+    </p>
+  </section>
+
+  <!-- ATUAÇÃO -->
+  <section id="atuacao" style="background: var(--bg-alt); max-width: none; padding-left: 0; padding-right: 0;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 2rem;">
+      <p class="section-label">Palco</p>
+      <h2>Atuação artística</h2>
+      <p>
+        Realiza apresentações solo e acompanha cantores, tendo atuado em bandas autorais e tributos a artistas internacionais, além de projetos de <strong>Pop, MPB, Samba e Bossa Nova</strong>.
+      </p>
+      <p>
+        Apresentou-se em casas de shows e bares do Rio de Janeiro, como <strong>Rio Rock Experience, Calabouço Bar, Duck Walk Pub, Lapa Irish Pub, Tower Park Tijuca, Food Park Carioca, Angu do Gomes e Rio Scenarium</strong>.
+      </p>
+
+      <ul class="highlights">
+        <li><strong>Roça 'n Roll</strong></li>
+        <li><strong>Festival de Bandas Novas de Juiz de Fora</strong> — vencedor em 2007 e 2008 com a banda Jones is Dead</li>
+        <li><strong>Festival de Música dos Correios</strong> — campeão em 2013 e 2015 com choros autorais</li>
+        <li><strong>FestVilla</strong> — finalista em 2019 e 2025</li>
+        <li>Executou o <strong>Hino Nacional Brasileiro</strong> na ALERJ, na entrega da Medalha Tiradentes ao Centro Cultural Correios e no Diwali — Festival das Luzes, do Consulado da Índia</li>
+        <li>Atuação em casamentos e cerimônias</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PRODUÇÃO CULTURAL -->
+  <section id="producao">
+    <p class="section-label">Bastidores</p>
+    <h2>Produção cultural e gestão</h2>
+    <p>
+      Entre <strong>2017 e 2023</strong>, trabalhou no setor de planejamento do <strong>Centro Cultural Correios</strong>, avaliando projetos culturais, elaborando pareceres técnicos e acompanhando a preparação, o desenvolvimento e a execução de eventos junto a artistas, curadores e produtores.
+    </p>
+    <p>
+      Também foi convidado a apoiar a organização dos eventos musicais do <strong>Cassino Cultural</strong>, no Cassino Atlântico.
+    </p>
+  </section>
+
+  <!-- COMPOSIÇÃO -->
+  <section id="composicao" style="background: var(--bg-alt); max-width: none; padding-left: 0; padding-right: 0;">
+    <div style="max-width: 1100px; margin: 0 auto; padding: 0 2rem;">
+      <p class="section-label">Criação</p>
+      <h2>Composição, produção e direção</h2>
+      <p>
+        Participou da <strong>Orquestra de Pau e Cordas</strong> da Escola de Música Villa-Lobos, que incluiu seu choro-maxixe <strong>Conversa Afiada</strong> no repertório.
+      </p>
+      <p>
+        Criou e dirige o <strong>Villa-Metal</strong>, prática de conjunto especializada nas vertentes do Metal.
+      </p>
+      <p>
+        Em parceria com a cantora <strong>Mila Andará</strong>, gravou e produziu o EP de Bossa Nova Lo-Fi <strong>Flow Mansinho</strong>, disponível nas principais plataformas de streaming.
+      </p>
+
+      <div class="grid" style="margin-top: 2.5rem;">
+        <div class="card">
+          <h3>Conversa Afiada</h3>
+          <p>Choro-maxixe de sua autoria incluído no repertório da Orquestra de Pau e Cordas da EMVL.</p>
+        </div>
+        <div class="card">
+          <h3>Villa-Metal</h3>
+          <p>Prática de conjunto criada e dirigida por ele, focada nas vertentes do Metal.</p>
+        </div>
+        <div class="card">
+          <h3>Flow Mansinho</h3>
+          <p>EP de Bossa Nova Lo-Fi produzido em parceria com Mila Andará. Disponível no Spotify e demais plataformas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL / CONTATO -->
+  <section class="social-section" id="contato">
+    <p class="section-label">Conecte-se</p>
+    <h2>Redes e streaming</h2>
+    <p style="max-width: 520px; margin-left: auto; margin-right: auto;">
+      Acompanhe o trabalho, assista performances e ouça as produções.
+    </p>
+
+    <div class="social-links">
+      <a href="https://www.instagram.com/brucardoso.music" target="_blank" rel="noopener" class="social-link">
+        Instagram
+      </a>
+      <a href="https://tiktok.com/@brucardoso.music" target="_blank" rel="noopener" class="social-link">
+        TikTok
+      </a>
+      <a href="https://youtube.com/brunocardosomusic" target="_blank" rel="noopener" class="social-link">
+        YouTube
+      </a>
+      <a href="https://open.spotify.com/intl-pt/album/4hBmPSWds9OP4YMzDqvkFW" target="_blank" rel="noopener" class="social-link">
+        Spotify — Flow Mansinho
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Bru Cardoso · Rio de Janeiro</p>
+  </footer>
+
+  <script>
+    // Navbar border on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function closeMobileMenu() {
+      menuToggle.classList.remove('active');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    menuToggle.addEventListener('click', () => {
+      menuToggle.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Smooth scroll for all internal links (prevents blank page issue)
+    function scrollToSection(e) {
+      const href = this.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+
+      e.preventDefault();
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+
+      if (target) {
+        closeMobileMenu();
+        const top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    }
+
+    // Apply to all internal links
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', scrollToSection);
+    });
+  </script>
+</body>
+</html>
